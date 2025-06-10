@@ -2,6 +2,12 @@
 
 This guide explains how to deploy OpenHands to Railway.com with Docker-in-Docker (DinD) support for the runtime environment.
 
+## 🔄 Recent Updates
+
+- **Fixed python-dotenv dependency issue**: Updated Dockerfile to properly install all Python dependencies including python-dotenv
+- **Improved dependency verification**: Added dependency testing in both build and runtime phases
+- **Enhanced PORT handling**: Better support for Railway's dynamic PORT environment variable
+
 ## Files Overview
 
 ### 1. `Dockerfile.railway`
