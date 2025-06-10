@@ -1,0 +1,35 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile.railway"
+
+[deploy]
+startCommand = "uvicorn openhands.server.listen:app --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[environments.production.variables]
+# OpenHands Configuration
+SANDBOX_RUNTIME_CONTAINER_IMAGE = "docker.all-hands.dev/all-hands-ai/runtime:0.41-nikolaik"
+SANDBOX_USER_ID = "0"
+RUN_AS_OPENHANDS = "true"
+USE_HOST_NETWORK = "false"
+FILE_STORE = "local"
+FILE_STORE_PATH = "/.openhands-state"
+WORKSPACE_BASE = "/opt/workspace_base"
+
+# Docker Configuration for Railway
+DOCKER_TLS_CERTDIR = ""
+DOCKER_HOST = "unix:///var/run/docker.sock"
+
+# Server Configuration
+SERVE_FRONTEND = "true"
+LOG_LEVEL = "INFO"
+
+# Security Configuration
+SANDBOX_LOCAL_RUNTIME_URL = "http://localhost"
+
+[environments.production.deploy]
+# Railway-specific deployment settings
+numReplicas = 1
