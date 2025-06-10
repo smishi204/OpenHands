@@ -49,6 +49,10 @@ fi
 addgroup openhands docker 2>/dev/null || true
 addgroup openhands docker_runtime 2>/dev/null || true
 
+# Test Python dependencies
+echo "Testing Python dependencies..."
+su openhands -c "cd /app && python -c 'import openhands.agenthub; import dotenv; print(\"✅ All dependencies loaded successfully\")'"
+
 echo "Running OpenHands as openhands user..."
 export RUN_AS_OPENHANDS=true
 
